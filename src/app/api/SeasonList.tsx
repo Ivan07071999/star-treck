@@ -1,13 +1,19 @@
 import { Component } from 'react';
-import type { ApiResponse, Season } from '../../index';
+import { SeasonCard, type ApiResponse, type ContentSectionState } from '../../index';
 import './season.css';
 
-export class ContentSection extends Component<{ searchQuery?: string }> {
-  state = {
-    allSeasons: [] as Season[],
-    seasons: [] as Season[],
+export class ContentSection extends Component<
+  {
+    searchQuery?: string;
+    onSeasonSelect: (uid: string) => void;
+  },
+  ContentSectionState
+> {
+  state: ContentSectionState = {
+    allSeasons: [],
+    seasons: [],
     loading: true,
-    error: null as string | null,
+    error: null,
   };
 
   componentDidMount() {
@@ -55,6 +61,7 @@ export class ContentSection extends Component<{ searchQuery?: string }> {
 
   render() {
     const { seasons, loading, error } = this.state;
+    const { onSeasonSelect } = this.props;
 
     return (
       <section className="content-section">
@@ -66,23 +73,17 @@ export class ContentSection extends Component<{ searchQuery?: string }> {
           {error && <div className="error">{error}</div>}
 
           {!loading && !error && (
-            <div className="season-grid">
-              {seasons.map((season) => (
-                <div key={season.uid} className="season-card">
-                  <h3 className="season-title">{season.title}</h3>
-                  <p>
-                    <strong>Series: </strong> {season.series.title}
-                  </p>
-                  <p>
-                    <strong>Season number: </strong> {season.seasonNumber}
-                  </p>
-                  <p>
-                    <strong>Number of episodes: </strong>
-                    {season.numberOfEpisodes !== null ? season.numberOfEpisodes : 'Unknown'}
-                  </p>
+            <>
+              {seasons.length === 0 ? (
+                <div className="no-results">There are no seasons matching your search.</div>
+              ) : (
+                <div className="season-grid">
+                  {seasons.map((season) => (
+                    <SeasonCard key={season.uid} season={season} onClick={onSeasonSelect} />
+                  ))}
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </div>
       </section>

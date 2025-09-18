@@ -1,8 +1,12 @@
 import { Component } from 'react';
 import './layout.css';
+import type { SearchSectionState } from '../../index';
 
-export class SearchSection extends Component<{ onSearch: (query: string) => void }> {
-  state = {
+export class SearchSection extends Component<
+  { onSearch: (query: string) => void },
+  SearchSectionState
+> {
+  state: SearchSectionState = {
     searchQuery: '',
   };
 
