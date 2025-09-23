@@ -29,7 +29,7 @@ export class SeasonDetails extends Component<
       const data: { season: SeasonDetail } = await response.json();
       this.setState({ season: data.season, loading: false });
     } catch (err) {
-      this.setState({ error: `Failed to load season data.${err}`, loading: false });
+      this.setState({ error: `${err}`, loading: false });
     }
   };
 
