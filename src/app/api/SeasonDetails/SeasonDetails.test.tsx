@@ -1,5 +1,5 @@
 import { render, waitFor, screen } from '@testing-library/react';
-import { SeasonDetails } from '../../index';
+import { SeasonDetails } from '../../../index';
 import { vi, type Mock } from 'vitest';
 
 const mockSeasonDetail = {

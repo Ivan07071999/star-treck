@@ -1,37 +1,31 @@
-import { Component } from 'react';
-import { Header, SearchSection, ContentSection, SeasonDetails, type AppState } from '../index';
+import { useState } from 'react';
+import { Header, SearchSection, ContentSection, SeasonDetails } from '../index';
 
-export class App extends Component<object, AppState> {
-  state: AppState = {
-    searchQuery: '',
-    selectedSeasonUid: null,
+export function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedSeasonUid, setSelectedSeasonUid] = useState<string | null>(null);
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
   };
 
-  handleSearch = (query: string) => {
-    this.setState({ searchQuery: query });
+  const handleSeasonSelect = (uid: string) => {
+    setSelectedSeasonUid(uid);
   };
 
-  handleSeasonSelect = (uid: string) => {
-    this.setState({ selectedSeasonUid: uid });
+  const handleBack = () => {
+    setSelectedSeasonUid(null);
   };
 
-  handleBack = () => {
-    this.setState({ selectedSeasonUid: null });
-  };
-
-  render() {
-    const { searchQuery, selectedSeasonUid } = this.state;
-
-    return (
-      <div>
-        <Header />
-        <SearchSection onSearch={this.handleSearch} />
-        {selectedSeasonUid ? (
-          <SeasonDetails uid={selectedSeasonUid} onBack={this.handleBack} />
-        ) : (
-          <ContentSection searchQuery={searchQuery} onSeasonSelect={this.handleSeasonSelect} />
-        )}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header />
+      <SearchSection onSearch={handleSearch} />
+      {selectedSeasonUid ? (
+        <SeasonDetails uid={selectedSeasonUid} onBack={handleBack} />
+      ) : (
+        <ContentSection searchQuery={searchQuery} onSeasonSelect={handleSeasonSelect} />
+      )}
+    </div>
+  );
 }

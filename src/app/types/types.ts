@@ -100,3 +100,35 @@ export type AppState = {
   searchQuery: string;
   selectedSeasonUid: string | null;
 };
+
+export type SeasonCardProps = {
+  season: Season;
+  onClick: (uid: string) => void;
+};
+
+export type SearchSectionProps = {
+  onSearch: (query: string) => void;
+};
+
+export type SeasonsGridProps = {
+  seasons: Season[];
+  onSeasonSelect: (uid: string) => void;
+};
+
+export type SeasonHeaderProps = {
+  season: SeasonDetail;
+};
+
+export type EpisodeListProps = {
+  episodes: Episode[];
+};
+
+export type SeasonDetailsProps = {
+  uid: string;
+  onBack: () => void;
+};
+
+export type ContentSectionProps = {
+  searchQuery?: string;
+  onSeasonSelect: (uid: string) => void;
+};

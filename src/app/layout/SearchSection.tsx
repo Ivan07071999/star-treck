@@ -1,43 +1,36 @@
-import { Component } from 'react';
 import './layout.css';
-import type { SearchSectionState } from '../../index';
+import { useState, type KeyboardEvent } from 'react';
+import type { SearchSectionProps } from '../../index';
 
-export class SearchSection extends Component<
-  { onSearch: (query: string) => void },
-  SearchSectionState
-> {
-  state: SearchSectionState = {
-    searchQuery: '',
+export function SearchSection({ onSearch }: SearchSectionProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
   };
 
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchQuery: e.target.value });
+  const handleSearch = () => {
+    onSearch(searchQuery);
   };
 
-  handleSearch = () => {
-    this.props.onSearch(this.state.searchQuery);
-  };
-
-  handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      this.handleSearch();
+      handleSearch();
     }
   };
 
-  render() {
-    return (
-      <section className="search-section">
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={this.state.searchQuery}
-            onChange={this.handleInputChange}
-            onKeyDown={this.handleKeyPress}
-          />
-          <button onClick={this.handleSearch}>Find</button>
-        </div>
-      </section>
-    );
-  }
+  return (
+    <section className="search-section">
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
+        />
+        <button onClick={handleSearch}>Find</button>
+      </div>
+    </section>
+  );
 }

@@ -1,53 +1,41 @@
-import { Component } from 'react';
-import { SeasonCard, type ApiResponse, type ContentSectionState } from '../../index';
+import { useState, useEffect } from 'react';
+import { type ApiResponse, type Season, type ContentSectionProps } from '../../index';
+import { SeasonGrid } from '../../index';
 import './season.css';
 
-export class ContentSection extends Component<
-  {
-    searchQuery?: string;
-    onSeasonSelect: (uid: string) => void;
-  },
-  ContentSectionState
-> {
-  state: ContentSectionState = {
-    allSeasons: [],
-    seasons: [],
-    loading: true,
-    error: null,
-  };
+export function ContentSection({ searchQuery, onSeasonSelect }: ContentSectionProps) {
+  const [allSeasons, setAllSeasons] = useState<Season[]>([]);
+  const [seasons, setSeasons] = useState<Season[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  componentDidMount() {
-    this.fetchSeasons();
-  }
+  useEffect(() => {
+    async function fetchSeasons() {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch('https://stapi.co/api/v1/rest/season/search');
 
-  componentDidUpdate(prevProps: { searchQuery?: string }) {
-    if (prevProps.searchQuery !== this.props.searchQuery) {
-      this.fetchSeasons();
-    }
-  }
+        if (!response.ok) {
+          throw new Error('Failed to load data');
+        }
 
-  fetchSeasons = async () => {
-    this.setState({ loading: true, error: null });
-
-    try {
-      const response = await fetch('https://stapi.co/api/v1/rest/season/search');
-      if (!response.ok) {
-        throw new Error('Failed to load data');
+        const data: ApiResponse = await response.json();
+        setAllSeasons(data.seasons);
+        setSeasons(data.seasons);
+        setLoading(false);
+      } catch (err) {
+        setError(`${err}`);
+        setLoading(false);
       }
-      const data: ApiResponse = await response.json();
-      this.setState({ allSeasons: data.seasons, loading: false }, () => this.filterSeasons());
-    } catch (err) {
-      this.setState({ error: 'Failed to load season data', loading: false });
-      new Error(`${err}`);
     }
-  };
 
-  filterSeasons = () => {
-    const { searchQuery } = this.props;
-    const { allSeasons } = this.state;
+    fetchSeasons();
+  }, []);
 
+  useEffect(() => {
     if (!searchQuery || searchQuery.trim() === '') {
-      this.setState({ seasons: allSeasons });
+      setSeasons(allSeasons);
       return;
     }
 
@@ -56,37 +44,39 @@ export class ContentSection extends Component<
       season.title.toLowerCase().includes(query)
     );
 
-    this.setState({ seasons: filteredSeasons });
-  };
+    setSeasons(filteredSeasons);
+  }, [searchQuery, allSeasons]);
 
-  render() {
-    const { seasons, loading, error } = this.state;
-    const { onSeasonSelect } = this.props;
+  // if (loading) {
+  //   return (
+  //     <section className="content-section">
+  //       <div className="content-container">
+  //         <div className="loading">Loading data...</div>
+  //       </div>
+  //     </section>
+  //   );
+  // }
 
-    return (
-      <section className="content-section">
-        <div className="content-container">
-          <h2>Star Trek Seasons</h2>
+  // if (error) {
+  //   return (
+  //     <section className="content-section">
+  //       <div className="content-container">
+  //         <div className="error">{error}</div>
+  //       </div>
+  //     </section>
+  //   );
+  // }
 
-          {loading && <div className="loading">Loading data...</div>}
+  return (
+    <section className="content-section">
+      <div className="content-container">
+        <h2>Star Trek Seasons</h2>
+        <SeasonGrid seasons={seasons} onSeasonSelect={onSeasonSelect} />
 
-          {error && <div className="error">{error}</div>}
+        {loading && <div className="loading">Loading data...</div>}
 
-          {!loading && !error && (
-            <>
-              {seasons.length === 0 ? (
-                <div className="no-results">There are no seasons matching your search.</div>
-              ) : (
-                <div className="season-grid">
-                  {seasons.map((season) => (
-                    <SeasonCard key={season.uid} season={season} onClick={onSeasonSelect} />
-                  ))}
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      </section>
-    );
-  }
+        {error && <div className="error">{error}</div>}
+      </div>
+    </section>
+  );
 }
