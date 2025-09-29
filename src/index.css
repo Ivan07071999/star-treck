@@ -21,3 +21,11 @@ body {
   margin: 0;
   background-color: #fff;
 }
+
+.app {
+  font-family: Arial, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+} 

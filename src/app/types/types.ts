@@ -126,9 +126,46 @@ export type EpisodeListProps = {
 export type SeasonDetailsProps = {
   uid: string;
   onBack: () => void;
+  season: SeasonDetail;
 };
 
 export type ContentSectionProps = {
   searchQuery?: string;
   onSeasonSelect: (uid: string) => void;
+};
+
+export type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
+
+export type SeasonsListProps = {
+  seasons: Season[];
+  onSeasonSelect: (uid: string) => void;
+  loading: boolean;
+  error: string | null;
+  searchQuery?: string;
+};
+
+export type MasterSectionProps = {
+  seasons: Season[];
+  totalSeasons: number;
+  onSeasonSelect: (uid: string) => void;
+  loading: boolean;
+  error: string | null;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  searchQuery?: string;
+};
+
+export type DetailSectionProps = {
+  selectedSeasonUid: string | null;
+  onBack: () => void;
+};
+
+export type SeasonsPageProps = {
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
 };

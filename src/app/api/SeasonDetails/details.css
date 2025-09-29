@@ -1,0 +1,149 @@
+.details-container {
+  line-height: 1.6;
+}
+
+.season-header {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+}
+
+.season-detailTitle {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1a1a2e;
+  border-bottom: 2px solid #4a6fa5;
+  padding-bottom: 10px;
+}
+
+.season-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1 fr));
+}
+
+.episodes-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1a1a2e;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.episodes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.episode-card {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.episode-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #1a1a2e;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.episode-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.feature-badge {
+  background-color: #4a6fa5;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.back-button {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #4a6fa5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 1024px) {
+  .episodes-list {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .details-container {
+    line-height: 1.5;
+  }
+
+  .back-button {
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  } 
+}
+
+@media (max-width: 768px) {
+  .details-container {
+    line-height: 1.4;
+  }
+
+  .season-header {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .season-detailTitle {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+  }
+
+  .season-meta {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .episodes-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .episode-card {
+    padding: 12px;
+  }
+
+  .episode-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+
+  .episode-meta {
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+
+  .back-button {
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}

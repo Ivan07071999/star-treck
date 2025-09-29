@@ -117,7 +117,7 @@ describe('ContentSection', () => {
     render(<ContentSection onSeasonSelect={vi.fn()} />);
 
     await waitFor(() => {
-      expect(screen.getByText(/Failed to load season data/i)).toBeInTheDocument();
+      expect(screen.getByText(/Error: Failed to load data/i)).toBeInTheDocument();
     });
   });
 

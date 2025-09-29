@@ -47,26 +47,6 @@ export function ContentSection({ searchQuery, onSeasonSelect }: ContentSectionPr
     setSeasons(filteredSeasons);
   }, [searchQuery, allSeasons]);
 
-  // if (loading) {
-  //   return (
-  //     <section className="content-section">
-  //       <div className="content-container">
-  //         <div className="loading">Loading data...</div>
-  //       </div>
-  //     </section>
-  //   );
-  // }
-
-  // if (error) {
-  //   return (
-  //     <section className="content-section">
-  //       <div className="content-container">
-  //         <div className="error">{error}</div>
-  //       </div>
-  //     </section>
-  //   );
-  // }
-
   return (
     <section className="content-section">
       <div className="content-container">

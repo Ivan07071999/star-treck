@@ -1,4 +1,5 @@
 import type { SeasonHeaderProps } from '../../../index';
+import './details.css';
 
 export function SeasonHeader({ season }: SeasonHeaderProps) {
   return (

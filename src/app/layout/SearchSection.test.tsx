@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { SearchSection } from '../../index';
 import { vi } from 'vitest';
 
-describe('SearchSection', () => {
+describe('searchSection', () => {
   test('Renders input and button', () => {
     const mockOnSearch = vi.fn();
     render(<SearchSection onSearch={mockOnSearch} />);
@@ -15,7 +15,7 @@ describe('SearchSection', () => {
     expect(button).toBeInTheDocument();
   });
 
-  test('Calls onSearch when button is clicked', async () => {
+  test('calls onSearch when button is clicked', async () => {
     const mockOnSearch = vi.fn();
     render(<SearchSection onSearch={mockOnSearch} />);
 
@@ -28,7 +28,7 @@ describe('SearchSection', () => {
     expect(mockOnSearch).toHaveBeenCalledWith('test query');
   });
 
-  test('Calls onSearch when Enter is pressed', async () => {
+  test('calls onSearch when Enter is pressed', async () => {
     const mockOnSearch = vi.fn();
     render(<SearchSection onSearch={mockOnSearch} />);
 

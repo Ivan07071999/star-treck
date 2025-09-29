@@ -1,31 +1,30 @@
+import { Header, SearchSection, SeasonsPage } from '../index';
+import { Routes, Route } from 'react-router-dom';
+import '../index.css';
 import { useState } from 'react';
-import { Header, SearchSection, ContentSection, SeasonDetails } from '../index';
-
+import { NotFound } from './api/NotFound/NotFound';
 export function App() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSeasonUid, setSelectedSeasonUid] = useState<string | null>(null);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
   };
 
-  const handleSeasonSelect = (uid: string) => {
-    setSelectedSeasonUid(uid);
-  };
-
-  const handleBack = () => {
-    setSelectedSeasonUid(null);
-  };
-
   return (
-    <div>
+    <div className="app">
       <Header />
       <SearchSection onSearch={handleSearch} />
-      {selectedSeasonUid ? (
-        <SeasonDetails uid={selectedSeasonUid} onBack={handleBack} />
-      ) : (
-        <ContentSection searchQuery={searchQuery} onSeasonSelect={handleSeasonSelect} />
-      )}
+      <Routes>
+        <Route
+          path="/"
+          element={<SeasonsPage searchQuery={searchQuery} onSearchChange={setSearchQuery} />}
+        />
+        <Route
+          path="/:page"
+          element={<SeasonsPage searchQuery={searchQuery} onSearchChange={setSearchQuery} />}
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }

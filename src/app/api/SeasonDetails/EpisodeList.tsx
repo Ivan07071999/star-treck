@@ -1,5 +1,5 @@
 import type { EpisodeListProps } from '../../../index';
-
+import './details.css';
 export function EpisodeList({ episodes }: EpisodeListProps) {
   return (
     <>

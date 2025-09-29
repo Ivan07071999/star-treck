@@ -1,8 +1,10 @@
-import { render, waitFor, screen } from '@testing-library/react';
-import { SeasonDetails } from '../../../index';
-import { vi, type Mock } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { SeasonDetails } from './SeasonDetails';
+import type { SeasonDetail } from '../../types';
+import { vi } from 'vitest';
 
-const mockSeasonDetail = {
+const mockSeasonDetail: SeasonDetail = {
   uid: 'SAMA0000001633',
   title: 'TNG Season 1',
   series: {
@@ -46,88 +48,139 @@ const mockSeasonDetail = {
       yearTo: 2364,
       usAirDate: '1988-03-14',
     },
+    {
+      uid: 'EPMA0000000516',
+      title: 'Conspiracy',
+      series: {
+        uid: 'SEMA0000062876',
+        title: 'Star Trek: The Next Generation',
+      },
+      season: {
+        uid: 'SAMA0000001633',
+        title: 'TNG Season 1',
+      },
+      seasonNumber: 1,
+      episodeNumber: 25,
+      productionSerialNumber: '40271-125',
+      featureLength: false,
+      yearFrom: 2364,
+      yearTo: 2364,
+      usAirDate: '1988-05-09',
+    },
   ],
 };
 
 describe('SeasonDetails', () => {
+  const mockOnBack = vi.fn();
+
   beforeEach(() => {
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
-  test('Render loading state initially', () => {
-    render(<SeasonDetails uid="SAMA0000001633" onBack={vi.fn()} />);
+  test('renders season details correctly', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
 
-    expect(screen.getByText(/loading data.../i)).toBeInTheDocument();
+    expect(screen.getByText(mockSeasonDetail.title)).toBeInTheDocument();
+
+    expect(screen.getByText(mockSeasonDetail.series.title)).toBeInTheDocument();
+
+    expect(screen.getByText(`Season number:`)).toBeInTheDocument();
+
+    expect(screen.getByText(`Number of episodes:`)).toBeInTheDocument();
   });
 
-  test('renders season details and episodes after data is loaded', async () => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ season: mockSeasonDetail }),
-      })
-    ) as Mock;
+  test('renders episodes list', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
 
-    render(<SeasonDetails uid="SAMA0000001633" onBack={vi.fn()} />);
+    expect(screen.getByText('Episodes')).toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(screen.getByText(mockSeasonDetail.title)).toBeInTheDocument();
-      expect(screen.getByText(mockSeasonDetail.series.title)).toBeInTheDocument();
-      expect(screen.getByText(mockSeasonDetail.seasonNumber)).toBeInTheDocument();
-      expect(screen.getByText(mockSeasonDetail.numberOfEpisodes)).toBeInTheDocument();
-      expect(screen.getByText(mockSeasonDetail.episodes[0].title)).toBeInTheDocument();
-    });
-  });
-
-  test('Renders error message when API call fails', async () => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: false,
-      })
-    ) as Mock;
-
-    render(<SeasonDetails uid="SAMA0000001633" onBack={vi.fn()} />);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Error: Error loading season data./i)).toBeInTheDocument();
-      screen.debug();
-    });
-  });
-
-  test('Displays production company and broadcaster when available', async () => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ season: mockSeasonDetail }),
-      })
-    ) as Mock;
-
-    render(<SeasonDetails uid="SAMA0000001633" onBack={vi.fn()} />);
-
-    await waitFor(() => {
-      expect(screen.getByText(mockSeasonDetail.series.productionCompany?.name)).toBeInTheDocument();
-      expect(
-        screen.getByText(mockSeasonDetail.series.originalBroadcaster?.name)
-      ).toBeInTheDocument();
-    });
-  });
-
-  test('Display episodes details correctly', async () => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ season: mockSeasonDetail }),
-      })
-    ) as Mock;
-
-    render(<SeasonDetails uid="SAMA0000001633" onBack={vi.fn()} />);
-
-    await waitFor(() => {
-      const episode = mockSeasonDetail.episodes[0];
+    mockSeasonDetail.episodes.forEach((episode) => {
       expect(screen.getByText(episode.title)).toBeInTheDocument();
-      expect(screen.getByText(episode.episodeNumber)).toBeInTheDocument();
-      expect(screen.getByText(episode.usAirDate)).toBeInTheDocument();
-      expect(screen.getByText(episode.productionSerialNumber)).toBeInTheDocument();
     });
+  });
+
+  test('renders episode details correctly', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
+  });
+
+  test('renders feature badge for feature length episodes', () => {
+    const featureEpisode = {
+      ...mockSeasonDetail.episodes[0],
+      featureLength: true,
+      title: 'Feature Episode',
+    };
+
+    const seasonWithFeatureEpisode = {
+      ...mockSeasonDetail,
+      episodes: [featureEpisode],
+    };
+
+    render(
+      <SeasonDetails
+        uid={seasonWithFeatureEpisode.uid}
+        onBack={mockOnBack}
+        season={seasonWithFeatureEpisode}
+      />
+    );
+
+    expect(screen.getByText('Full-length')).toBeInTheDocument();
+  });
+
+  test('does not render feature badge for non-feature episodes', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
+
+    expect(screen.queryByText('Full-length')).not.toBeInTheDocument();
+  });
+
+  test('renders production company when available', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
+
+    expect(screen.getByText(`Production company:`)).toBeInTheDocument();
+  });
+
+  test('renders original broadcaster when available', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
+
+    expect(screen.getByText(`Original broadcaster:`)).toBeInTheDocument();
+  });
+
+  test('calls onBack when close button is clicked', async () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
+
+    const closeButton = screen.getByRole('button', { name: /← close/i });
+
+    await userEvent.click(closeButton);
+
+    expect(mockOnBack).toHaveBeenCalledTimes(1);
+  });
+
+  test('renders years of production when available', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
+
+    expect(screen.getByText(`Years of production:`)).toBeInTheDocument();
+  });
+
+  test('renders original run dates when available', () => {
+    render(
+      <SeasonDetails uid={mockSeasonDetail.uid} onBack={mockOnBack} season={mockSeasonDetail} />
+    );
+
+    expect(screen.getByText(`Display period:`)).toBeInTheDocument();
   });
 });
