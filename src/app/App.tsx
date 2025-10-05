@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import '../index.css';
 import { useState } from 'react';
 import { NotFound } from './api/NotFound/NotFound';
+
 export function App() {
   const [searchQuery, setSearchQuery] = useState('');
 

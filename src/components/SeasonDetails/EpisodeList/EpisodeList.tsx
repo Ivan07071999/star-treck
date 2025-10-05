@@ -1,7 +1,6 @@
-import type { EpisodeListProps } from '../../../index';
-import './details.css';
+import './EpisodeList.css';
 
-export function EpisodeList({ episodes }: EpisodeListProps) {
+export const EpisodeList = ({ episodes }) => {
   return (
     <>
       <h3 className="episodes-title">Episodes</h3>
