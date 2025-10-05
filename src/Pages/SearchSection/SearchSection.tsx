@@ -3,9 +3,11 @@ import './SearchSection.css';
 
 export const SearchSection = () => {
   return (
-    <search className="search__section">
-      <MyInput />
-      <MyButton>Find</MyButton>
+    <search className="search-section">
+      <div className="search-container">
+        <MyInput />
+        <MyButton>Find</MyButton>
+      </div>
     </search>
   );
 };
