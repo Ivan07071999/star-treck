@@ -34,4 +34,4 @@ export const EpisodeList = ({ episodes }) => {
       </div>
     </>
   );
-}
+};
