@@ -1,6 +1,5 @@
 .seasons-grid {
   display: grid;
-  width: 70%;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 1rem;
