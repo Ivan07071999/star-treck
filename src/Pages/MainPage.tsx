@@ -25,8 +25,8 @@ export const MainPage = () => {
   return (
     <SeasonUidContext.Provider value={handleSeasonUid}>
       <main className="main-page">
-        <SearchSection />
-        <section className="content__container">
+        <SearchSection onSearch={undefined} />
+        <section className="content-container">
           {seasonError && <h1>An error has occurred $`{seasonError}`</h1>}
           {isSeasonsLoading ? (
             <div

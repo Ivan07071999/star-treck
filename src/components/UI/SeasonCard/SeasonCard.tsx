@@ -7,6 +7,7 @@ export const SeasonCard = ({ season, onClick }) => {
 
   const handleClick = () => {
     handleSeasonUid(season.uid);
+
     if (onClick) {
       onClick(season.uid);
     }
