@@ -1,19 +1,17 @@
-import { getPagesArray } from '../../../index';
 import './Pagination.css';
 
-export const Pagination = ({ totalPages, page, changePage }) => {
-  const pagesArray = getPagesArray(totalPages);
+export const Pagination = ({ seasonsPerPage, totalPages, paginate }) => {
+  const pageNumbers = [];
 
+  for (let i = 1; i <= Math.ceil(totalPages / seasonsPerPage); i += 1) {
+    pageNumbers.push(i);
+  }
   return (
-    <div className="page__wrapper">
-      {pagesArray.map((p) => (
-        <span
-          onClick={() => changePage(p)}
-          key={p}
-          className={page === p ? 'page__current' : 'page'}
-        >
-          {p}
-        </span>
+    <div className="pagination">
+      {pageNumbers.map((number) => (
+        <button className="pagination-button" key={number} onClick={() => paginate(number)}>
+          {number}
+        </button>
       ))}
     </div>
   );

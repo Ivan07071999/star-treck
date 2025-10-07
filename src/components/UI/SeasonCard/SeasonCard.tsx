@@ -2,15 +2,12 @@ import './SeasonCars.css';
 import { SeasonUidContext } from '../../../index';
 import { useContext } from 'react';
 
-export const SeasonCard = ({ season, onClick }) => {
+export const SeasonCard = ({ season }) => {
   const handleSeasonUid = useContext(SeasonUidContext);
 
   const handleClick = () => {
     handleSeasonUid(season.uid);
 
-    if (onClick) {
-      onClick(season.uid);
-    }
     console.log(SeasonUidContext);
   };
 

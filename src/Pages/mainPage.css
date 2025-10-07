@@ -1,4 +1,5 @@
 .content-container {
+  height: 100vh;
   display: flex;
   flex: 1;
   padding: 20px;
