@@ -5,7 +5,7 @@ export const SeasonsList = ({
   seasons,
   seasonsPerPage = { seasonsPerPage },
   totalPages = { totalPages },
-  paginate = { paginate },
+  handlePageChange = { handlePageChange },
 }) => {
   return (
     <div className="main-wrapper">
@@ -14,7 +14,11 @@ export const SeasonsList = ({
           <SeasonCard key={season.uid} season={season} />
         ))}
       </div>
-      <Pagination seasonsPerPage={seasonsPerPage} totalPages={totalPages} paginate={paginate} />
+      <Pagination
+        seasonsPerPage={seasonsPerPage}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import { Header, MainPage } from './index';
+import { Header, AppRouter } from './index';
 import './index.css';
 
 export function App() {
   return (
     <div className="app">
       <Header />
-      <MainPage />
+      <AppRouter />
     </div>
   );
 }

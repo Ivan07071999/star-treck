@@ -1,8 +1,9 @@
 .loader {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   border: 3px dashed teal;
+  margin: 0 auto;
   animation: rotate 2s infinite linear;
 }
 

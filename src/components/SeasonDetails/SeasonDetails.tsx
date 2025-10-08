@@ -8,9 +8,12 @@ import {
   Loader,
 } from '../../index';
 import './SeasonDetails.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const SeasonDetails = ({ selectedSeasonUid }) => {
   const [season, setSeason] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [fetchSelectSeasons, isSeasonsLoading, seasonError] = useFetching(async () => {
     const response = await SeasonService.getSelectSeason(selectedSeasonUid);
@@ -24,9 +27,16 @@ export const SeasonDetails = ({ selectedSeasonUid }) => {
     fetchSelectSeasons();
   }, [selectedSeasonUid]);
 
+  const handleButtonClick = () => {
+    setSeason(null);
+    const params = new URLSearchParams(location.search);
+    params.delete('seasonId');
+    navigate(`${location.pathname}?${params.toString()}`);
+  };
+
   return (
     <aside className="details-container">
-      <MyButton onClick={() => setSeason(null)}>Close</MyButton>
+      <MyButton onClick={handleButtonClick}>Close</MyButton>
       {season ? (
         <>
           <SeasonHeader season={season} />
