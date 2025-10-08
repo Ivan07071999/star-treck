@@ -1,6 +1,7 @@
 import './SeasonsHeader.css';
+import { type SelectSeason } from '../../../types';
 
-export const SeasonHeader = ({ season }) => {
+export const SeasonHeader = ({ season }: { season: SelectSeason }) => {
   return (
     <div className="season-header">
       <h2 className="season-detailTitle">{season.title}</h2>

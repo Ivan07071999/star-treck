@@ -1,28 +1,31 @@
 import './mainPage.css';
 import { Loader, SearchSection, SeasonDetails, SeasonService, useFetching } from '../index';
-import { createContext, useEffect, useState } from 'react';
+import type { Season } from '../index';
+import { useEffect, useState } from 'react';
 import { SeasonsList } from '../index';
 import { useLocation, useNavigate } from 'react-router-dom';
-export const SeasonUidContext = createContext(null);
+import { SeasonUidContext } from '../index';
 
 export const MainPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [seasons, setSeasons] = useState([]);
-  const [filteredSeasons, setFilteredSeasons] = useState([]);
-  const [seasonUid, setSeasonUid] = useState('');
-  const [seasonsPerPage] = useState(9);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [seasons, setSeasons] = useState<Season[]>([]);
+  const [filteredSeasons, setFilteredSeasons] = useState<Season[]>([]);
+  const [seasonUid, setSeasonUid] = useState<string>('');
+  const [seasonsPerPage] = useState<number>(9);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const pageParam = parseInt(params.get('page')) || 1;
+    const pageParam = Number(params.get('page')) || 1;
     setCurrentPage(pageParam);
   }, [location.search]);
 
-  const handleSeasonUid = (data: string) => {
-    setSeasonUid(data);
+  const handleSeasonUid = (data: string | null) => {
+    if (data !== null) {
+      setSeasonUid(data);
+    }
   };
 
   const [fetchSeasons, isSeasonsLoading, seasonError] = useFetching(async () => {
@@ -39,21 +42,21 @@ export const MainPage = () => {
   const firstSeasonIndex = lastSeasonIndex - seasonsPerPage;
   const currentSeasons = filteredSeasons.slice(firstSeasonIndex, lastSeasonIndex);
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     const params = new URLSearchParams(location.search);
-    params.set('page', pageNumber);
+    params.set('page', pageNumber.toString());
     navigate(`${location.pathname}?${params.toString()}`);
   };
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const pageParam = parseInt(params.get('page')) || 1;
+    const pageParam = Number(params.get('page')) || 1;
     setCurrentPage(pageParam);
   }, [location.search]);
 
   return (
-    <SeasonUidContext.Provider value={handleSeasonUid}>
+    <SeasonUidContext.Provider value={{ uid: seasonUid, setUid: handleSeasonUid }}>
       <main className="main-page">
         <SearchSection
           seasons={seasons}

@@ -1,20 +1,21 @@
 import './SeasonCars.css';
-import { SeasonUidContext } from '../../../index';
+import { SeasonUidContext, type Season } from '../../../index';
 import { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const SeasonCard = ({ season }) => {
-  const handleSeasonUid = useContext(SeasonUidContext);
+export const SeasonCard = ({ season }: { season: Season }) => {
+  const context = useContext(SeasonUidContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleClick = () => {
-    handleSeasonUid(season.uid);
+    if (context) {
+      context.setUid(season.uid);
+    }
+
     const params = new URLSearchParams(location.search);
     params.set('seasonId', season.uid);
     navigate(`${location.pathname}?${params.toString()}`);
-
-    console.log(SeasonUidContext);
   };
 
   return (

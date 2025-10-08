@@ -6,17 +6,19 @@ import {
   SeasonService,
   useFetching,
   Loader,
+  type SelectSeason,
+  type ResponseType,
 } from '../../index';
 import './SeasonDetails.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const SeasonDetails = ({ selectedSeasonUid }) => {
-  const [season, setSeason] = useState(null);
+export const SeasonDetails = ({ selectedSeasonUid }: { selectedSeasonUid: string }) => {
+  const [season, setSeason] = useState<SelectSeason | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
   const [fetchSelectSeasons, isSeasonsLoading, seasonError] = useFetching(async () => {
-    const response = await SeasonService.getSelectSeason(selectedSeasonUid);
+    const response: ResponseType = await SeasonService.getSelectSeason(selectedSeasonUid);
     setSeason(response.season);
   });
 

@@ -1,6 +1,14 @@
 import './Pagination.css';
 
-export const Pagination = ({ seasonsPerPage, totalPages, handlePageChange }) => {
+export const Pagination = ({
+  seasonsPerPage,
+  totalPages,
+  handlePageChange,
+}: {
+  seasonsPerPage: number;
+  totalPages: number;
+  handlePageChange: (pageNumber: number) => void;
+}) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPages / seasonsPerPage); i += 1) {

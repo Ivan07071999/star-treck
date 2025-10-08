@@ -1,12 +1,12 @@
-import { Pagination, SeasonCard } from '../../../index';
+import { Pagination, SeasonCard, type SeasonsListProps } from '../../../index';
 import './SeasonsList.css';
 
 export const SeasonsList = ({
   seasons,
-  seasonsPerPage = { seasonsPerPage },
-  totalPages = { totalPages },
-  handlePageChange = { handlePageChange },
-}) => {
+  seasonsPerPage,
+  totalPages,
+  handlePageChange,
+}: SeasonsListProps) => {
   return (
     <div className="main-wrapper">
       <div className="seasons-grid">

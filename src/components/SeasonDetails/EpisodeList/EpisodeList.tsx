@@ -1,6 +1,7 @@
+import type { Episode } from '../../../types';
 import './EpisodeList.css';
 
-export const EpisodeList = ({ episodes }) => {
+export const EpisodeList = ({ episodes }: { episodes: Episode[] }) => {
   return (
     <>
       <h3 className="episodes-title">Episodes</h3>
