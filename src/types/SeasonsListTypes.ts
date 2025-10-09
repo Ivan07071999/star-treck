@@ -1,4 +1,4 @@
-import type { Episode, Season, Series } from '../index';
+import type { Season } from '../index';
 
 export type SeasonsListProps = {
   seasons: Season[];
