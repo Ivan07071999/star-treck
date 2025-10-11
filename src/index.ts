@@ -4,3 +4,4 @@ export * from './Pages';
 export * from './hooks';
 export * from './types';
 export * from './context';
+export * from './store';

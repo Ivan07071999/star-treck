@@ -8,7 +8,7 @@ export class SeasonService {
     return data;
   }
 
-  static async getSelectSeason(uid: string) {
+  static async getSelectSeason(uid: string | null) {
     const response = await fetch(`https://stapi.co/api/v1/rest/season?uid=${uid}`);
     const data: ResponseType = await response.json();
 

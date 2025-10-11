@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { MyButton, MyInput } from '../../index';
-import type { SearchSectionType } from '../../index';
+import { MyButton, MyInput, seasonSlice, useAppDispatch, useAppSelector } from '../../index';
 import './SearchSection.css';
 
-export const SearchSection = ({
-  seasons,
-  setCurrentPage,
-  setFilteredSeasons,
-}: SearchSectionType) => {
+export const SearchSection = () => {
+  const dispatch = useAppDispatch();
+  const { switchPage, setFilteredSeasons } = seasonSlice.actions;
+  const { allSeasons } = useAppSelector((state) => state.seasonReducer);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,16 +13,16 @@ export const SearchSection = ({
   };
 
   const handleSearch = () => {
-    const query = searchQuery;
+    const query = searchQuery.trim().toLowerCase();
     if (query === '') {
-      setFilteredSeasons(seasons);
+      dispatch(setFilteredSeasons(allSeasons));
     } else {
-      const filteredSeasons = [...seasons].filter((season) =>
+      const filteredSeasons = allSeasons.filter((season) =>
         season.title.toLowerCase().includes(query.toLowerCase())
       );
-      setFilteredSeasons(filteredSeasons);
+      dispatch(setFilteredSeasons(filteredSeasons));
     }
-    setCurrentPage(1);
+    dispatch(switchPage(1));
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {

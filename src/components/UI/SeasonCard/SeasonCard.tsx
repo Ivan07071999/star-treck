@@ -1,17 +1,18 @@
 import './SeasonCars.css';
-import { SeasonUidContext, type Season } from '../../../index';
-import { useContext } from 'react';
+import { useAppDispatch, type Season } from '../../../index';
+
 import { useLocation, useNavigate } from 'react-router-dom';
+import { detailsSlice } from '../../../store/reducers/DetailsSlice';
 
 export const SeasonCard = ({ season }: { season: Season }) => {
-  const context = useContext(SeasonUidContext);
+  const dispatch = useAppDispatch();
+  const { setSeasonUid } = detailsSlice.actions;
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleClick = () => {
-    if (context) {
-      context.setUid(season.uid);
-    }
+    dispatch(setSeasonUid(season.uid));
 
     const params = new URLSearchParams(location.search);
     params.set('seasonId', season.uid);

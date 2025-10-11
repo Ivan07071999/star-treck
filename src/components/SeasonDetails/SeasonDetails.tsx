@@ -1,36 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   MyButton,
   SeasonHeader,
   EpisodeList,
-  SeasonService,
-  useFetching,
   Loader,
-  type SelectSeason,
-  type ResponseType,
+  useAppDispatch,
+  useAppSelector,
+  fetchSelectSeasons,
 } from '../../index';
 import './SeasonDetails.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { detailsSlice } from '../../store/reducers/DetailsSlice';
 
-export const SeasonDetails = ({ selectedSeasonUid }: { selectedSeasonUid: string }) => {
-  const [season, setSeason] = useState<SelectSeason | null>(null);
+export const SeasonDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [fetchSelectSeasons, isSeasonsLoading, seasonError] = useFetching(async () => {
-    const response: ResponseType = await SeasonService.getSelectSeason(selectedSeasonUid);
-    setSeason(response.season);
-  });
+  const dispatch = useAppDispatch();
+  const { season, isLoading, error, seasonUid } = useAppSelector((state) => state.detailsReducer);
+  const { setSeasonUid, resetSelectSeason } = detailsSlice.actions;
 
   useEffect(() => {
-    if (selectedSeasonUid === '') {
-      return;
+    if (seasonUid) {
+      dispatch(fetchSelectSeasons({ uid: seasonUid }));
     }
-    fetchSelectSeasons();
-  }, [selectedSeasonUid]);
+  }, [dispatch, seasonUid]);
 
   const handleButtonClick = () => {
-    setSeason(null);
+    dispatch(setSeasonUid(null));
+    dispatch(resetSelectSeason(null));
     const params = new URLSearchParams(location.search);
     params.delete('seasonId');
     navigate(`${location.pathname}?${params.toString()}`);
@@ -47,12 +45,8 @@ export const SeasonDetails = ({ selectedSeasonUid }: { selectedSeasonUid: string
       ) : (
         <p>Select Season</p>
       )}
-      {seasonError && <h1>An error has occurred $`{seasonError}`</h1>}
-      {isSeasonsLoading && (
-        <div>
-          <Loader />
-        </div>
-      )}
+      {error && <h1>{error}</h1>}
+      {isLoading && <Loader />}
     </aside>
   );
 };

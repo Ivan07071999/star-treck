@@ -10,10 +10,16 @@ export const Pagination = ({
   handlePageChange: (pageNumber: number) => void;
 }) => {
   const pageNumbers = [];
+  const totalItems = Math.ceil(totalPages / seasonsPerPage);
 
-  for (let i = 1; i <= Math.ceil(totalPages / seasonsPerPage); i += 1) {
+  for (let i = 1; i <= totalItems; i += 1) {
     pageNumbers.push(i);
   }
+
+  if (totalItems <= 1) {
+    return null;
+  }
+
   return (
     <div className="pagination">
       {pageNumbers.map((number) => (
