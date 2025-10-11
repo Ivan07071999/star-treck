@@ -13,7 +13,6 @@ export const SeasonCard = ({ season }: { season: Season }) => {
   const selectedItems = useAppSelector((state) => state.selectedItemsReducer.items);
 
   useEffect(() => {
-    // Проверяем, выбран ли текущий элемент
     const isCurrentlySelected = selectedItems.some((item) => item.uid === season.uid);
     setIsSelected(isCurrentlySelected);
   }, [selectedItems, season.uid]);
@@ -34,7 +33,6 @@ export const SeasonCard = ({ season }: { season: Season }) => {
     const checked = e.target.checked;
 
     if (checked) {
-      // Формируем URL для деталей сезона
       const url = `${window.location.origin}/seasons?seasonId=${season.uid}`;
 
       const newItem: SelectedItem = {
@@ -80,44 +78,3 @@ export const SeasonCard = ({ season }: { season: Season }) => {
     </div>
   );
 };
-
-// import './SeasonCars.css';
-// import { useAppDispatch, type Season } from '../../../index';
-
-// import { useLocation, useNavigate } from 'react-router-dom';
-// import { detailsSlice } from '../../../store/reducers/DetailsSlice';
-
-// export const SeasonCard = ({ season }: { season: Season }) => {
-//   const dispatch = useAppDispatch();
-//   const { setSeasonUid } = detailsSlice.actions;
-
-//   const navigate = useNavigate();
-//   const location = useLocation();
-
-//   const handleClick = () => {
-//     dispatch(setSeasonUid(season.uid));
-
-//     const params = new URLSearchParams(location.search);
-//     params.set('seasonId', season.uid);
-//     navigate(`${location.pathname}?${params.toString()}`);
-//   };
-
-//   return (
-//     <div className="season-card" onClick={handleClick}>
-//       <h3 className="season-title">{season.title}</h3>
-//       <p>
-//         <strong>Series: </strong> {season.series.title}{' '}
-//       </p>{' '}
-//       <p>
-//         <strong>Season number:</strong> {season.seasonNumber}{' '}
-//       </p>{' '}
-//       <p>
-//         <strong>Number of episodes: </strong>
-//         {season.numberOfEpisodes !== null ? season.numberOfEpisodes : 'Unknown'}{' '}
-//       </p>
-//       <div className="card-footer">
-//         <span className="click-hint">Click for details</span>
-//       </div>
-//     </div>
-//   );
-// };

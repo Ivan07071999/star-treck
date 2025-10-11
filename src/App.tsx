@@ -1,4 +1,4 @@
-import { SelectedItemsBar } from './components/SelectedItemBar';
+import { SelectedItemsBar } from './index';
 import { Header, AppRouter, ThemeProvider } from './index';
 import './index.css';
 

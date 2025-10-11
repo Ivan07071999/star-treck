@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import { SeasonsList } from '../index';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { SelectedItemsBar } from '../components/SelectedItemBar';
+import { SelectedItemsBar } from '../index';
 
 export const MainPage = () => {
   const dispatch = useAppDispatch();
