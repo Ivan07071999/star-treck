@@ -1,11 +1,15 @@
-import { Header, AppRouter } from './index';
+import { SelectedItemsBar } from './components/SelectedItemBar';
+import { Header, AppRouter, ThemeProvider } from './index';
 import './index.css';
 
 export function App() {
   return (
-    <div className="app">
-      <Header />
-      <AppRouter />
-    </div>
+    <ThemeProvider>
+      <div className={`app`}>
+        <Header />
+        <AppRouter />
+        <SelectedItemsBar />
+      </div>
+    </ThemeProvider>
   );
 }

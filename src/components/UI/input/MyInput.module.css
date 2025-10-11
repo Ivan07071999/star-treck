@@ -6,3 +6,9 @@
   border-radius: 8px;
   outline: none;
 }
+
+.dark .myInput {
+  background-color: #2d2d44;
+  border-color: #444;
+  color: #e0e0e0;
+}

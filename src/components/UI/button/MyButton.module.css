@@ -17,3 +17,11 @@
 .myBtn:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.dark .myBtn {
+  background-color: #4a6fa5;
+}
+
+.dark .myBtn:hover {
+  background-color: #646cff;
+}

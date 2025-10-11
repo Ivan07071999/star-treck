@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import { SeasonsList } from '../index';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { SelectedItemsBar } from '../components/SelectedItemBar';
 
 export const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -36,13 +37,6 @@ export const MainPage = () => {
     navigate(`${location.pathname}?${params.toString()}`);
   };
 
-  // useEffect(() => {
-  //   const params = new URLSearchParams(location.search);
-  //   const pageParam = Number(params.get('page')) || 1;
-  //   // setCurrentPage(pageParam);
-  //   dispatch(switchPage(pageParam));
-  // }, [location.search]);
-
   return (
     <main className="main-page">
       <SearchSection />
@@ -61,8 +55,8 @@ export const MainPage = () => {
             <SeasonDetails />
           </>
         )}
-        {/* <SeasonDetails selectedSeasonUid={seasonUid} /> */}
       </section>
+      <SelectedItemsBar />
     </main>
   );
 };

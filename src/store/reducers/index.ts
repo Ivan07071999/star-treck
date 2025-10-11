@@ -1,3 +1,3 @@
 export * from './SeasonSlice';
 export * from './ActionCreator';
-export * from './ThemeSlice';
+export * from './SelectedItemsSlice';

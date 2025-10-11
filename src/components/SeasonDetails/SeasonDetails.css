@@ -1,4 +1,6 @@
 .details-container {
+  height: 120dvh;
+  overflow-y: auto;
   line-height: 1.6;
   flex: 1;
   padding: 1rem;

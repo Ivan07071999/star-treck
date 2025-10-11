@@ -2,7 +2,6 @@
   background-color: #f5f5f5;
   padding: 20px;
   border-radius: 16px;
-
   margin: 30px 0;
   border: 1px solid #ddd;
 }
@@ -18,4 +17,14 @@
 .season-meta {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1 fr));
+}
+
+.dark .season-header {
+  background-color: #2d2d44;
+  border-color: #444;
+}
+
+.dark .season-detailTitle {
+  color: #e0e0e0;
+  border-bottom-color: #4a6fa5;
 }

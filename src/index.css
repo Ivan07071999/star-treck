@@ -9,6 +9,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 #root {
   font-family: 'Arial, sans-serif';
   color: #333;
@@ -19,7 +20,7 @@
 
 body {
   margin: 0;
-  background-color:  #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .app {
@@ -32,5 +33,156 @@ body {
 
 a {
   text-decoration: none;
+  color: #4a6fa5;
 }
 
+.app.light {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.light .header {
+  background-color: #1a1a2e;
+  color: #fff;
+}
+
+.light .season-card {
+  background-color: #f9f9f9;
+  border-color: #ddd;
+}
+
+.light .season-title {
+  color: #1a1a2e;
+}
+
+.light .episode-card {
+  background-color: #f9f9f9;
+  border-color: #ddd;
+}
+
+.light .episode-title {
+  color: #1a1a2e;
+}
+
+.light .search-section {
+  background-color: #f5f5f5;
+}
+
+.light .content-container {
+  background-color: #f5f5f5;
+}
+
+.app.dark {
+  background-color: #12121e;
+  color: #e0e0e0;
+}
+
+.dark .header {
+  background-color: #0d0d1a;
+  color: #e0e0e0;
+}
+
+.dark .season-card {
+  background-color: #2d2d44;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.dark .season-title {
+  color: #e0e0e0;
+}
+
+.dark .episode-card {
+  background-color: #2d2d44;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.dark .episode-title {
+  color: #e0e0e0;
+}
+
+.dark .search-section {
+  background-color: #1a1a2e;
+  border-bottom-color: #333;
+}
+
+.dark .content-container {
+  background-color: #1a1a2e;
+}
+
+.dark .season-header {
+  background-color: #2d2d44;
+  border-color: #444;
+}
+
+.dark .season-detailTitle {
+  color: #e0e0e0;
+  border-bottom-color: #4a6fa5;
+}
+
+.dark .myInput {
+  background-color: #2d2d44;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.dark .myBtn {
+  background-color: #4a6fa5;
+}
+
+.dark .myBtn:hover {
+  background-color: #646cff;
+}
+
+.dark .pagination-button {
+  background-color: #4a6fa5;
+}
+
+.dark .pagination-button:hover {
+  background-color: #646cff;
+}
+
+.dark .episodes-title {
+  color: #e0e0e0;
+  border-bottom-color: #444;
+}
+
+.dark .episode-meta {
+  color: #e0e0e0;
+}
+
+.dark .feature-badge {
+  background-color: #646cff;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding-bottom: 80px;
+  }
+  
+  .seasons-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .season-card {
+    padding: 12px;
+  }
+  
+  .episodes-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .episode-card {
+    padding: 12px;
+  }
+  
+  .season-header {
+    padding: 15px;
+  }
+  
+  .season-meta {
+    grid-template-columns: 1fr;
+  }
+}

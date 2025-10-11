@@ -6,6 +6,20 @@
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.season-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-top: 5px;
 }
 
 .season-title {
@@ -14,6 +28,7 @@
   color: #1a1a2e;
   border-bottom: 1px solid #eee;
   padding-bottom: 8px;
+  flex: 1;
 }
 
 .card-footer {
@@ -21,10 +36,6 @@
   padding-top: 10px;
   border-top: 1px solid #eee;
   text-align: center;
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 .click-hint {
@@ -32,9 +43,33 @@
   color: #666;
   font-style: italic;
   transition: color 0.25s;
+}
 
-  &:hover {
-    cursor: pointer;
-    color: #d32f2f;
-  }
+.click-hint:hover {
+  cursor: pointer;
+  color: #d32f2f;
+}
+
+/* Темная тема */
+.dark .season-card {
+  background-color: #2d2d44;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.dark .season-title {
+  color: #e0e0e0;
+  border-bottom-color: #555;
+}
+
+.dark .card-footer {
+  border-top-color: #444;
+}
+
+.dark .click-hint {
+  color: #bbb;
+}
+
+.dark .click-hint:hover {
+  color: #ff6b6b;
 }

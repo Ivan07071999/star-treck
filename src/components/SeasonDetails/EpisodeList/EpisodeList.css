@@ -42,3 +42,27 @@
   border-radius: 12px;
   font-size: 0.8rem;
 }
+
+.dark .episodes-title {
+  color: #e0e0e0;
+  border-bottom-color: #444;
+}
+
+.dark .episode-card {
+  background-color: #2d2d44;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.dark .episode-title {
+  color: #e0e0e0;
+  border-bottom-color: #444;
+}
+
+.dark .episode-meta {
+  color: #e0e0e0;
+}
+
+.dark .feature-badge {
+  background-color: #646cff;
+}
