@@ -1,52 +1,59 @@
-import { useEffect } from 'react';
 import {
   MyButton,
   SeasonHeader,
   EpisodeList,
   Loader,
   useAppDispatch,
+  setSelectedSeasonUid,
+  seasonAPI,
   useAppSelector,
-  fetchSelectSeasons,
 } from '../../index';
 import './SeasonDetails.css';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { detailsSlice } from '../../store/reducers/DetailsSlice';
 
 export const SeasonDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const dispatch = useAppDispatch();
-  const { season, isLoading, error, seasonUid } = useAppSelector((state) => state.detailsReducer);
-  const { setSeasonUid, resetSelectSeason } = detailsSlice.actions;
 
-  useEffect(() => {
-    if (seasonUid) {
-      dispatch(fetchSelectSeasons({ uid: seasonUid }));
-    }
-  }, [dispatch, seasonUid]);
+  const { selectedSeasonUid } = useAppSelector((state) => state.UIReducer);
+  const {
+    data: seasonData,
+    error,
+    isLoading,
+  } = seasonAPI.useGetSeasonByIdQuery(selectedSeasonUid || '', {
+    skip: !selectedSeasonUid,
+  });
 
   const handleButtonClick = () => {
-    dispatch(setSeasonUid(null));
-    dispatch(resetSelectSeason(null));
+    dispatch(setSelectedSeasonUid(null));
     const params = new URLSearchParams(location.search);
     params.delete('seasonId');
     navigate(`${location.pathname}?${params.toString()}`);
   };
 
+  if (!selectedSeasonUid) {
+    return (
+      <aside className="details-container">
+        <p>Select a season to view details</p>
+      </aside>
+    );
+  }
+
   return (
     <aside className="details-container">
       <MyButton onClick={handleButtonClick}>Close</MyButton>
-      {season ? (
+      {error && <h1>An error occurred while fetching season details</h1>}
+      {isLoading ? (
+        <Loader />
+      ) : seasonData ? (
         <>
-          <SeasonHeader season={season} />
-          <EpisodeList episodes={season.episodes} />
+          <SeasonHeader season={seasonData.season} />
+          <EpisodeList episodes={seasonData.season.episodes} />
         </>
       ) : (
-        <p>Select Season</p>
+        <p>Select a season to view details</p>
       )}
-      {error && <h1>{error}</h1>}
-      {isLoading && <Loader />}
     </aside>
   );
 };

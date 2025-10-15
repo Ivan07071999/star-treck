@@ -1,10 +1,11 @@
 import './mainPage.css';
 import {
-  fetchAllSeasons,
   Loader,
   SearchSection,
+  seasonAPI,
   SeasonDetails,
-  seasonSlice,
+  setAllSeasons,
+  setPageNumber,
   useAppDispatch,
   useAppSelector,
 } from '../index';
@@ -15,23 +16,34 @@ import { SelectedItemsBar } from '../index';
 
 export const MainPage = () => {
   const dispatch = useAppDispatch();
-  const { switchPage } = seasonSlice.actions;
-  const { isLoading, pageNumber, error, seasons } = useAppSelector((state) => state.seasonReducer);
+
+  const { pageNumber, filteredSeasons, allSeasons } = useAppSelector((state) => state.UIReducer);
+  const { data: seasons = [], error, isLoading } = seasonAPI.useGetSeasonsQuery();
 
   const navigate = useNavigate();
   const location = useLocation();
   const [seasonsPerPage] = useState<number>(9);
 
   useEffect(() => {
-    dispatch(fetchAllSeasons());
-  }, [dispatch]);
+    if (seasons.length > 0 && allSeasons.length === 0) {
+      dispatch(setAllSeasons(seasons));
+    }
+  }, [seasons, allSeasons.length, dispatch]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const pageParam = Number(params.get('page')) || 1;
+    if (pageParam !== pageNumber) {
+      dispatch(setPageNumber(pageParam));
+    }
+  }, [location.search, dispatch]);
 
   const lastSeasonIndex = pageNumber * seasonsPerPage;
   const firstSeasonIndex = lastSeasonIndex - seasonsPerPage;
-  const currentSeasons = seasons.slice(firstSeasonIndex, lastSeasonIndex);
+  const currentSeasons = filteredSeasons.slice(firstSeasonIndex, lastSeasonIndex);
 
   const handlePageChange = (pageNumber: number) => {
-    dispatch(switchPage(pageNumber));
+    dispatch(setPageNumber(pageNumber));
     const params = new URLSearchParams(location.search);
     params.set('page', pageNumber.toString());
     navigate(`${location.pathname}?${params.toString()}`);
@@ -41,7 +53,7 @@ export const MainPage = () => {
     <main className="main-page">
       <SearchSection />
       <section className="content-container">
-        {error && <h1>{error}</h1>}
+        {error && <h1>An error occurred while fetching seasons</h1>}
         {isLoading ? (
           <Loader />
         ) : (
@@ -49,7 +61,7 @@ export const MainPage = () => {
             <SeasonsList
               seasons={currentSeasons}
               seasonsPerPage={seasonsPerPage}
-              totalPages={seasons.length}
+              totalPages={filteredSeasons.length}
               handlePageChange={handlePageChange}
             />
             <SeasonDetails />

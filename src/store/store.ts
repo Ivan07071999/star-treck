@@ -1,17 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import seasonReducer from './reducers/SeasonSlice';
-import detailsReducer from './reducers/DetailsSlice';
 import selectedItemsReducer from './reducers/SelectedItemsSlice';
+import { seasonAPI } from '../services';
+import UIReducer from './reducers/UIStateSlice';
 
 const rootReducer = combineReducers({
-  seasonReducer,
-  detailsReducer,
   selectedItemsReducer,
+  UIReducer,
+  [seasonAPI.reducerPath]: seasonAPI.reducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(seasonAPI.middleware),
   });
 };
 

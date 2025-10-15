@@ -1,13 +1,11 @@
 import './SeasonCars.css';
-import { useAppDispatch, useAppSelector, type Season } from '../../../index';
+import { setSelectedSeasonUid, useAppDispatch, useAppSelector, type Season } from '../../../index';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { detailsSlice } from '../../../store/reducers/DetailsSlice';
-import { addItem, removeItem, type SelectedItem } from '../../../store/reducers/SelectedItemsSlice';
+import { toggleItemSelection, type SelectedItem } from '../../../store/reducers/SelectedItemsSlice';
 import { useState, useEffect } from 'react';
 
 export const SeasonCard = ({ season }: { season: Season }) => {
   const dispatch = useAppDispatch();
-  const { setSeasonUid } = detailsSlice.actions;
   const [isSelected, setIsSelected] = useState(false);
 
   const selectedItems = useAppSelector((state) => state.selectedItemsReducer.items);
@@ -21,7 +19,7 @@ export const SeasonCard = ({ season }: { season: Season }) => {
   const location = useLocation();
 
   const handleClick = () => {
-    dispatch(setSeasonUid(season.uid));
+    dispatch(setSelectedSeasonUid(season.uid));
 
     const params = new URLSearchParams(location.search);
     params.set('seasonId', season.uid);
@@ -30,24 +28,19 @@ export const SeasonCard = ({ season }: { season: Season }) => {
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    const checked = e.target.checked;
 
-    if (checked) {
-      const url = `${window.location.origin}/seasons?seasonId=${season.uid}`;
+    const url = `${window.location.origin}/seasons?seasonId=${season.uid}`;
 
-      const newItem: SelectedItem = {
-        uid: season.uid,
-        title: season.title,
-        seriesTitle: season.series.title,
-        seasonNumber: season.seasonNumber,
-        numberOfEpisodes: season.numberOfEpisodes,
-        url,
-      };
+    const newItem: SelectedItem = {
+      uid: season.uid,
+      title: season.title,
+      seriesTitle: season.series.title,
+      seasonNumber: season.seasonNumber,
+      numberOfEpisodes: season.numberOfEpisodes,
+      url,
+    };
 
-      dispatch(addItem(newItem));
-    } else {
-      dispatch(removeItem(season.uid));
-    }
+    dispatch(toggleItemSelection(newItem));
   };
 
   return (

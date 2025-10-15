@@ -21,11 +21,13 @@ export const selectedItemsSlice = createSlice({
   name: 'selectedItems',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<SelectedItem>) => {
-      state.items.push(action.payload);
-    },
-    removeItem: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter((item) => item.uid !== action.payload);
+    toggleItemSelection: (state, action: PayloadAction<SelectedItem>) => {
+      const existingIndex = state.items.findIndex((item) => item.uid === action.payload.uid);
+      if (existingIndex >= 0) {
+        state.items.splice(existingIndex, 1);
+      } else {
+        state.items.push(action.payload);
+      }
     },
     clearItems: (state) => {
       state.items = [];
@@ -33,5 +35,5 @@ export const selectedItemsSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, clearItems } = selectedItemsSlice.actions;
+export const { toggleItemSelection, clearItems } = selectedItemsSlice.actions;
 export default selectedItemsSlice.reducer;

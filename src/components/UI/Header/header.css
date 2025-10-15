@@ -2,11 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1a1a2e;
+  background-color: rgba(0,0,0,0.85);
   color: #fff;
   padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
 }
 
 .theme-toggle {

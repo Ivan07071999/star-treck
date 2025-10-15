@@ -1,11 +1,17 @@
 import { useState } from 'react';
-import { MyButton, MyInput, seasonSlice, useAppDispatch, useAppSelector } from '../../index';
+import {
+  MyButton,
+  MyInput,
+  setFilteredSeasons,
+  setPageNumber,
+  useAppDispatch,
+  useAppSelector,
+} from '../../index';
 import './SearchSection.css';
 
 export const SearchSection = () => {
   const dispatch = useAppDispatch();
-  const { switchPage, setFilteredSeasons } = seasonSlice.actions;
-  const { allSeasons } = useAppSelector((state) => state.seasonReducer);
+  const { allSeasons } = useAppSelector((state) => state.UIReducer);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +28,7 @@ export const SearchSection = () => {
       );
       dispatch(setFilteredSeasons(filteredSeasons));
     }
-    dispatch(switchPage(1));
+    dispatch(setPageNumber(1));
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
