@@ -2,20 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(0,0,0,0.85);
-  color: #fff;
-  padding: 20px;
+  background: rgba(10, 15, 30, 0.9);
+  color: var(--text-light);
+  padding: 1rem 2rem;
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.15);
 }
+
 
 .theme-toggle {
   background: none;
   border: none;
-  color: white;
+  color: var(--accent-color);
   font-size: 1.5rem;
   cursor: pointer;
   padding: 5px;
@@ -27,8 +29,10 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.dark.header {
-  background-color: #0d0d1a;
+.light .header {
+  background-color: #eaeef5;
+  color: var(--text-dark);
+  border-bottom: 1px solid var(--border-light);
 }
 
 @media (max-width: 768px) {

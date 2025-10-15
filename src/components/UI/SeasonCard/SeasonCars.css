@@ -1,12 +1,22 @@
 .season-card {
-  height: fit-content;
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px;
+  background-color: var(--bg-panel-light);
+  transition: transform var(--transition), box-shadow var(--transition);
   position: relative;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.06);
+}
+
+.season-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px var(--accent-color);
+}
+
+.dark .season-card {
+  background-color: var(--bg-panel-dark);
+  border-color: var(--border-dark);
+  color: var(--text-light);
 }
 
 .card-header {
@@ -15,60 +25,30 @@
   align-items: flex-start;
 }
 
-.season-checkbox {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
 .season-title {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #1a1a2e;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
-  flex: 1;
+  margin: 0;
+  color: var(--accent-color);
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
 }
 
 .card-footer {
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px solid #eee;
   text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+  margin-top: 15px;
 }
 
 .click-hint {
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.85rem;
   font-style: italic;
-  transition: color 0.25s;
+  color: #bbb;
+  transition: color 0.3s;
 }
 
 .click-hint:hover {
   cursor: pointer;
-  color: #d32f2f;
-}
-
-.dark .season-card {
-  background-color: #2d2d44;
-  border-color: #444;
-  color: #e0e0e0;
-}
-
-.dark .season-title {
-  color: #e0e0e0;
-  border-bottom-color: #555;
-}
-
-.dark .card-footer {
-  border-top-color: #444;
-}
-
-.dark .click-hint {
-  color: #bbb;
-}
-
-.dark .click-hint:hover {
-  color: #ff6b6b;
+  color: var(--accent-color);
 }

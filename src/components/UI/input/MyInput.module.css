@@ -2,13 +2,21 @@
   flex: 1;
   padding: 12px 15px;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition);
+  background-color: white;
+  color: var(--text-dark);
+}
+
+.myInput:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
   outline: none;
 }
 
 .dark .myInput {
-  background-color: #2d2d44;
-  border-color: #444;
-  color: #e0e0e0;
+  background-color: rgba(20,25,45,0.9);
+  color: var(--border-light);
+  border-color: var(--border-dark);
 }

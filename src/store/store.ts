@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import selectedItemsReducer from './reducers/SelectedItemsSlice';
 import { seasonAPI } from '../services';
-import UIReducer from './reducers/UIStateSlice';
+import UIReducer from './reducers/UiStateSlice';
 
 const rootReducer = combineReducers({
   selectedItemsReducer,

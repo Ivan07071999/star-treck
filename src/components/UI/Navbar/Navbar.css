@@ -1,5 +1,18 @@
 .navbar__links {
   display: flex;
-  font-size: 1rem;
-  gap: 10px;
+  gap: 14px;
+}
+
+.navbar__links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition), text-shadow 0.3s;
+  font-family: 'Orbitron', sans-serif;
+  -webkit-text-stroke: 0.4px var(--accent-color);
+}
+
+.navbar__links a:hover {
+  color: var(--accent-color);
+  text-shadow: 0 0 8px var(--accent-color);
 }

@@ -1,7 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { SeasonService } from '../../API';
-import type { Season, ResponseType } from '../../index';
-import type { SeasonResponse } from './DetailsSlice';
+import type { Season, ResponseType, SelectSeason } from '../../index';
+
+export type SeasonResponse = {
+  season: SelectSeason;
+};
 
 export const fetchAllSeasons = createAsyncThunk<Season[], void, { rejectValue: string }>(
   'seasons/fetchSeasons',
