@@ -1,3 +1,3 @@
 export * from './ActionCreator';
 export * from './SelectedItemsSlice';
-export * from './UIStateSlice';
+export * from './UiStateSlice';
