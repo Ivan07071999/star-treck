@@ -1,6 +1,6 @@
 import './SeasonCars.css';
 import { setSelectedSeasonUid, useAppDispatch, useAppSelector, type Season } from '../../../index';
-import { useLocation, useNavigate } from 'react-router-dom';
+//import { useLocation, useNavigate } from 'react-router-dom';
 import { toggleItemSelection, type SelectedItem } from '../../../store/reducers/SelectedItemsSlice';
 import { useState, useEffect } from 'react';
 
@@ -15,8 +15,8 @@ export const SeasonCard = ({ season }: { season: Season }) => {
     setIsSelected(isCurrentlySelected);
   }, [selectedItems, season.uid]);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   const handleClick = () => {
     dispatch(setSelectedSeasonUid(season.uid));

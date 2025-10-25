@@ -9,7 +9,7 @@ import {
   useAppSelector,
 } from '../../index';
 import './SeasonDetails.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+//import { useLocation, useNavigate } from 'react-router-dom';
 
 export const SeasonDetails = () => {
   const location = useLocation();
