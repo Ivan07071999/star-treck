@@ -1,3 +1,5 @@
+'use client';
+
 import {
   MyButton,
   SeasonHeader,
@@ -9,11 +11,12 @@ import {
   useAppSelector,
 } from '../../index';
 import './SeasonDetails.css';
-//import { useLocation, useNavigate } from 'react-router-dom';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 export const SeasonDetails = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
 
   const { selectedSeasonUid } = useAppSelector((state) => state.UIReducer);
@@ -27,9 +30,10 @@ export const SeasonDetails = () => {
 
   const handleButtonClick = () => {
     dispatch(setSelectedSeasonUid(null));
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(searchParams.toString());
     params.delete('seasonId');
-    navigate(`${location.pathname}?${params.toString()}`);
+    const url = `${pathname}?${params.toString()}`;
+    router.push(url);
   };
 
   if (!selectedSeasonUid) {

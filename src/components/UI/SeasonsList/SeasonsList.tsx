@@ -1,12 +1,8 @@
-import { Pagination, SeasonCard, type SeasonsListProps } from '../../../index';
+import { SeasonsListProps } from '../../../types';
+import { SeasonCard } from '../SeasonCard';
 import './SeasonsList.css';
 
-export const SeasonsList = ({
-  seasons,
-  seasonsPerPage,
-  totalPages,
-  handlePageChange,
-}: SeasonsListProps) => {
+export const SeasonsList = ({ seasons }: SeasonsListProps) => {
   return (
     <div className="main-wrapper">
       <div className="seasons-grid">
@@ -14,11 +10,6 @@ export const SeasonsList = ({
           <SeasonCard key={season.uid} season={season} />
         ))}
       </div>
-      <Pagination
-        seasonsPerPage={seasonsPerPage}
-        totalPages={totalPages}
-        handlePageChange={handlePageChange}
-      />
     </div>
   );
 };

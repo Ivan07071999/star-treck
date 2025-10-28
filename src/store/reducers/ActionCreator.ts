@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { SeasonService } from '../../API';
+import { SeasonService } from '../../app/API';
 import type { Season, ResponseType, SelectSeason } from '../../index';
 
 export type SeasonResponse = {

@@ -1,4 +1,5 @@
-import type { ApiResponse, ResponseType } from '../index';
+//import type { ApiResponse, ResponseType } from '../index';
+import { ApiResponse, ResponseType } from '../../types';
 export class SeasonService {
   static async getAll() {
     const url = new URL('https://stapi.co/api/v1/rest/season/search');

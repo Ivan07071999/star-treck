@@ -1,13 +1,21 @@
 // //import { Link } from 'react-router-dom';
-// import './Navbar.css';
+'use client';
+import { createNavigation } from './navigation';
+import './Navbar.css';
+import Link from 'next/link';
 
-// export const Navbar = () => {
-//   return (
-//     <div className="navbar">
-//       <div className="navbar__links">
-//         <Link to="/about">About</Link>
-//         <Link to="/seasons?page=1">Seasons</Link>
-//       </div>
-//     </div>
-//   );
-// };
+export const Navbar = () => {
+  const navigationItems = createNavigation();
+
+  return (
+    <div className="navbar">
+      <nav className="navbar__links">
+        {navigationItems.map((item) => (
+          <Link key={item.href} href={item.href} className="navbar__link">
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+    </div>
+  );
+};
