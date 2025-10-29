@@ -1,6 +1,17 @@
 {
-  "navigation": {
-    "home": "Сезоны",
-    "about": "О нас"
+  "title": "Звёздный путь",
+  "navbar": {
+    "about": "О нас",
+    "seasons": "Сезоны"
+  },
+  "buttons": {
+    "resetCache": "Сбросить кеш",
+    "find": "Найти"
+  },
+  "mainPage": {
+    "title": "Доступные сезоны"
+  },
+  "placeholders": {
+    "search": "Поиск"
   }
 }

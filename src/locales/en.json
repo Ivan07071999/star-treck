@@ -1,6 +1,17 @@
 {
-  "navigation": {
-    "home": "Seasons",
-    "about": "About"
+  "title": "Star Trek",
+  "navbar": {
+    "about": "About",
+    "seasons": "Seasons"
+  },
+  "buttons": {
+    "resetCache": "Reset cache",
+    "find": "Find"
+  },
+  "mainPage": {
+    "title": "Available Seasons"
+  },
+  "placeholders": {
+    "search": "Search"
   }
 }

@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setAllSeasons, setPageNumber } from '../../store';
 import { Season } from '../../types';
 
-export const MainPage = ({ seasons }: { seasons: Season[] }) => {
+export const MainPage = ({ seasons, locale }: { seasons: Season[]; locale: string }) => {
   const dispatch = useAppDispatch();
   const { pageNumber, filteredSeasons, allSeasons } = useAppSelector((state) => state.UIReducer);
   const [seasonsPerPage] = useState<number>(9);
@@ -33,7 +33,7 @@ export const MainPage = ({ seasons }: { seasons: Season[] }) => {
 
   return (
     <main className="main-page">
-      <SearchSection />
+      <SearchSection locale={locale} />
       <section className="content-container">
         {allSeasons.length === 0 ? (
           <Loader />
