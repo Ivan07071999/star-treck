@@ -50,7 +50,6 @@ body {
   position: relative;
 }
 
-/* ===== STARFIELD BACKGROUND (PURE CSS) ===== */
 body.dark {
   color: var(--text-light);
   background: radial-gradient(ellipse at top, #000 0%, var(--bg-dark) 100%);

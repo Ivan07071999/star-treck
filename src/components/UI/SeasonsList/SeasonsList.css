@@ -11,10 +11,3 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
-
-.main-wrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
