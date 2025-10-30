@@ -1,7 +1,6 @@
 'use client';
 import './SeasonCars.css';
 import { setSelectedSeasonUid, useAppDispatch, useAppSelector, type Season } from '../../../index';
-//import { useLocation, useNavigate } from 'react-router-dom';
 import { toggleItemSelection, type SelectedItem } from '../../../store/reducers/SelectedItemsSlice';
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
@@ -23,22 +22,14 @@ export const SeasonCard = ({ season }: { season: Season }) => {
 
   const handleClick = () => {
     dispatch(setSelectedSeasonUid(season.uid));
-
-    // Создаем новый объект URLSearchParams на основе текущих параметров
     const params = new URLSearchParams(searchParams.toString());
     params.set('seasonId', season.uid);
-
-    // Формируем новый URL
     const url = `${pathname}?${params.toString()}`;
-
-    // Используем router.push для навигации
     router.push(url);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
-
-    // Формируем URL для элемента
     const url = `${window.location.origin}${pathname}?seasonId=${season.uid}`;
 
     const newItem: SelectedItem = {

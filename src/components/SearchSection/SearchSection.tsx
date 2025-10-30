@@ -8,24 +8,12 @@ import {
   useAppSelector,
 } from '../../index';
 import './SearchSection.css';
-import en from '../../locales/en.json';
-import ru from '../../locales/ru.json';
-
-const messages = { en, ru };
+import { t } from '../../utils/internationalization';
 
 export const SearchSection = ({ locale }: { locale: string }) => {
   const dispatch = useAppDispatch();
   const { allSeasons } = useAppSelector((state) => state.UIReducer);
   const [searchQuery, setSearchQuery] = useState<string>('');
-
-  const t = (key: string): string => {
-    const keys = key.split('.');
-    let translation: any = messages[locale as keyof typeof messages];
-    keys.forEach((k) => {
-      translation = translation?.[k];
-    });
-    return translation || key;
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -55,12 +43,12 @@ export const SearchSection = ({ locale }: { locale: string }) => {
       <div className="search-container">
         <MyInput
           type="text"
-          placeholder={t('placeholders.search')}
+          placeholder={t(locale, 'placeholders.search')}
           value={searchQuery}
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
         />
-        <MyButton onClick={handleSearch}>{t('buttons.find')}</MyButton>
+        <MyButton onClick={handleSearch}>{t(locale, 'buttons.find')}</MyButton>
       </div>
     </search>
   );

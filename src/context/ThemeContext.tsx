@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useState, useContext, type ReactNode, useEffect } from 'react';
+import { createContext, useState, type ReactNode, useEffect } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -24,11 +24,4 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
-};
+export default ThemeContext;

@@ -1,4 +1,4 @@
-export type AppLocalization = {
+export type LocaleMessages = {
   title: string;
   navbar: {
     about: string;
@@ -8,10 +8,15 @@ export type AppLocalization = {
     resetCache: string;
     find: string;
   };
-  mainPage: {
-    title: string;
-  };
   placeholders: {
     search: string;
+  };
+  about: {
+    title: string;
+    description: string;
+  };
+  '404': {
+    title: string;
+    description: string;
   };
 };

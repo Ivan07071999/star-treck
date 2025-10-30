@@ -8,10 +8,15 @@
     "resetCache": "Reset cache",
     "find": "Find"
   },
-  "mainPage": {
-    "title": "Available Seasons"
-  },
   "placeholders": {
     "search": "Search"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "This is the about page."
+  },
+  "404": {
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the page you're looking for."
   }
 }

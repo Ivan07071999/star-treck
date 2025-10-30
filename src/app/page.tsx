@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { MainPage } from '../components/MainPage/MainPage';
 import { SeasonService } from './API';
 import ReduxProvider from '../providers/ReduxProvider';
-import { ThemeProvider } from '../context';
 import { Header } from '../components';
 
 const page = async ({ searchParams }: { searchParams: Promise<{ locale?: string }> }) => {
@@ -11,7 +10,7 @@ const page = async ({ searchParams }: { searchParams: Promise<{ locale?: string 
   const data = await SeasonService.getAll();
 
   return (
-    <ThemeProvider>
+    <>
       <Header locale={locale} />
       <ReduxProvider>
         <Suspense>
@@ -20,7 +19,7 @@ const page = async ({ searchParams }: { searchParams: Promise<{ locale?: string 
           </div>
         </Suspense>
       </ReduxProvider>
-    </ThemeProvider>
+    </>
   );
 };
 
