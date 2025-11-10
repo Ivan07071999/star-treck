@@ -10,10 +10,11 @@ import {
   seasonAPI,
   useAppSelector,
 } from '../../index';
+import { t } from '../../utils/internationalization';
 import './SeasonDetails.css';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
-export const SeasonDetails = () => {
+export const SeasonDetails = ({ locale }: { locale: string }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -39,14 +40,14 @@ export const SeasonDetails = () => {
   if (!selectedSeasonUid) {
     return (
       <aside className="details-container">
-        <p>Select a season to view details</p>
+        <p>{t(locale, 'details.title')}</p>
       </aside>
     );
   }
 
   return (
     <aside className="details-container">
-      <MyButton onClick={handleButtonClick}>Close</MyButton>
+      <MyButton onClick={handleButtonClick}>{t(locale, 'details.button')}</MyButton>
       {error && <h1>An error occurred while fetching season details</h1>}
       {isLoading ? (
         <Loader />
@@ -56,7 +57,7 @@ export const SeasonDetails = () => {
           <EpisodeList episodes={seasonData.season.episodes} />
         </>
       ) : (
-        <p>Select a season to view details</p>
+        <p>{t(locale, 'details.title')}</p>
       )}
     </aside>
   );

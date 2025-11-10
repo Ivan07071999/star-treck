@@ -30,10 +30,13 @@
 }
 
 .light .header {
-  background-color: #eaeef5;
   color: var(--text-dark);
   border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-panel-light);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
+
+
 
 @media (max-width: 768px) {
   .header {

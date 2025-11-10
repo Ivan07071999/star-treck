@@ -10,7 +10,6 @@ export const Header = ({ locale }: { locale: string }) => {
   return (
     <header className={`header light`}>
       <h1 className="title">{t(locale, 'title')}</h1>
-      {/* <Navbar locale={locale} /> */}
       <Suspense fallback={<div>Loading...</div>}>
         <Navbar locale={locale} />
         <div>

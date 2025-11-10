@@ -4,8 +4,14 @@ import { setSelectedSeasonUid, useAppDispatch, useAppSelector, type Season } fro
 import { toggleItemSelection, type SelectedItem } from '../../../store/reducers/SelectedItemsSlice';
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 
-export const SeasonCard = ({ season }: { season: Season }) => {
+type SeasonCardProps = {
+  season: Season;
+  aboveTheFold?: boolean;
+};
+
+export const SeasonCard = ({ season, aboveTheFold = false }: SeasonCardProps) => {
   const dispatch = useAppDispatch();
   const [isSelected, setIsSelected] = useState(false);
 
@@ -46,6 +52,15 @@ export const SeasonCard = ({ season }: { season: Season }) => {
 
   return (
     <div className="season-card" onClick={handleClick}>
+      <Image
+        src={season.image.src.src}
+        alt={season.image.alt}
+        width={season.image.src.width}
+        height={season.image.src.height}
+        loading={'eager'}
+        priority={aboveTheFold}
+        className="season-image"
+      />
       <div className="card-header">
         <h3 className="season-title">{season.title}</h3>
         <input

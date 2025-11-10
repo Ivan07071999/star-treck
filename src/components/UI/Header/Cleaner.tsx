@@ -3,15 +3,15 @@
 import { MyButton } from '../button';
 import { useAppDispatch } from '../../../hooks';
 import { api } from '../../../services';
-import { setAllSeasons } from '../../../store';
 import { t } from '../../../utils/internationalization';
+import { setSelectedSeasonUid } from '../../../store';
 
 const CacheCleaner = ({ locale }: { locale: string }) => {
   const dispatch = useAppDispatch();
 
   const handleResetCache = () => {
+    dispatch(setSelectedSeasonUid(null));
     dispatch(api.util.resetApiState());
-    dispatch(setAllSeasons([]));
   };
 
   return (

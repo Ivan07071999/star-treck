@@ -13,12 +13,14 @@
 }
 
 .episode-card {
-  background-color: var(--panel-light);
+  color: var(--text-light);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
   padding: 15px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: all var(--transition);
+  background-color: var(--bg-panel-light);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .dark .episode-card {

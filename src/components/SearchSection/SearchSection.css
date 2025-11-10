@@ -1,9 +1,10 @@
 .search-section {
-  background-color: var(--panel-light);
+  /* background-color: var(--panel-light); */
   padding: 20px;
   display: flex;
   justify-content: center;
   border-bottom: 1px solid var(--border-light);
+  color: var(--text-light);
 }
 
 .dark .search-section {

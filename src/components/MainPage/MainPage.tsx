@@ -40,7 +40,7 @@ export const MainPage = ({ seasons, locale }: { seasons: Season[]; locale: strin
         ) : (
           <>
             <SeasonsList seasons={currentSeasons} />
-            <SeasonDetails />
+            <SeasonDetails locale={locale} />
           </>
         )}
       </section>

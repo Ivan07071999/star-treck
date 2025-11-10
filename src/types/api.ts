@@ -19,7 +19,32 @@ export type Series = {
   };
 };
 
+export type ImageSrc = {
+  src: string;
+  width: number;
+  height: number;
+  blurWidth?: number;
+  blurHeight?: number;
+  blurDataURL?: string;
+};
+
+export type SeasonImage = {
+  id: number;
+  src: ImageSrc;
+  alt: string;
+};
+
 export type Season = {
+  uid: string;
+  title: string;
+  series: Series;
+  seasonNumber: number;
+  numberOfEpisodes: number | null;
+  image: SeasonImage;
+};
+
+export type DataImagesType = {
+  image: SeasonImage;
   uid: string;
   title: string;
   series: Series;

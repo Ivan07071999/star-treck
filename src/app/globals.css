@@ -44,8 +44,10 @@ html {
 body {
   min-height: 100%;
   font-family: 'Exo 2', sans-serif;
-  background: var(--bg-light);
-  color: var(--text-dark);
+  /* background: var(--bg-light);
+  color: var(--text-dark); */
+  background: var(--bg-dark);
+  color: var(--bg-light);
   transition: background var(--transition), color var(--transition);
   position: relative;
 }
@@ -53,6 +55,10 @@ body {
 body.dark {
   color: var(--text-light);
   background: radial-gradient(ellipse at top, #000 0%, var(--bg-dark) 100%);
+}
+body.light {
+  color: var(--text-light);
+  background: radial-gradient(ellipse at top, #000 00%, var(--bg-light) 160%);
 }
 
 body.dark::before,
