@@ -7,6 +7,14 @@ const nextConfig = {
       defaultLocale: 'en',
     },
   },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
 };
 
 export default nextConfig;

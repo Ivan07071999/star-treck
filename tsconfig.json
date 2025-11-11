@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
+    "types": ["vitest/globals"],
     "lib": [
       "ES2020",
       "DOM",
@@ -35,7 +36,9 @@
     "./next-env.d.ts",
     "dist\\dev/types/**/*.ts",
     "dist\\dev/types/**/*.ts",
-    "./dist/dev/types/**/*.ts"
+    "./dist/dev/types/**/*.ts",
+    "dist/types/**/*.ts",
+    "dist/dev/types/**/*.ts"
   ],
   "exclude": [
     "./node_modules"

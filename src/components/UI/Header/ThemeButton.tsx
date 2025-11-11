@@ -9,6 +9,7 @@ const ThemeButton = () => {
     <button
       className="theme-toggle"
       onClick={toggleTheme}
+      data-testid="switchTheme"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
     >
       {theme === 'light' ? '🌙' : '☀️'}
