@@ -30,7 +30,7 @@ describe('My input element', () => {
     render(<MyInput {...props} />);
 
     const inputElement = screen.getByRole('textbox');
-    expect(inputElement).toHaveValue('test value');
+    expect(inputElement).toHaveValue(props.value);
     expect(inputElement).toHaveAttribute('placeholder', props.placeholder);
     expect(inputElement).toHaveAttribute('id', props.id);
     expect(inputElement).toHaveAttribute('name', props.name);
