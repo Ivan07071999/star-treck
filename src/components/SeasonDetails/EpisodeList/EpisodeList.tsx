@@ -20,6 +20,7 @@ export const EpisodeList = ({ episodes }: { episodes: Episode[] }) => {
               height={allSeasons[index].image.src.height}
               loading={'eager'}
               className="season-image"
+              data-testid="episode-image"
             />
             <h4 className="episode-title">{episode.title}</h4>
             <div className="episode-meta">
